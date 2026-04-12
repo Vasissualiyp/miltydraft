@@ -84,36 +84,44 @@
                                     <p class="team_label">Team 1</p>
                                     <div class="input player">
                                         <input type="text" placeholder="Player Name" name="player[]" value="<?php e($prefillNames, "Amy") ?>" />
+                                        <input type="email" placeholder="Email (optional)" name="player_email[]" class="player-email" />
                                     </div>
                                     <div class="input player">
                                         <input type="text" placeholder="Player Name" name="player[]" value="<?php e($prefillNames, "Ben") ?>" />
+                                        <input type="email" placeholder="Email (optional)" name="player_email[]" class="player-email" />
                                     </div>
                                 </div>
                                 <div class="alliance_team team_b">
                                     <p class="team_label">Team 2</p>
                                     <div class="input player">
                                         <input type="text" placeholder="Player Name" name="player[]" value="<?php e($prefillNames, "Charlie") ?>" />
+                                        <input type="email" placeholder="Email (optional)" name="player_email[]" class="player-email" />
                                     </div>
                                     <div class="input player">
                                         <input type="text" placeholder="Player Name" name="player[]" value="<?php e($prefillNames, "Desmond") ?>" />
+                                        <input type="email" placeholder="Email (optional)" name="player_email[]" class="player-email" />
                                     </div>
                                 </div>
                                 <div class="alliance_team team_c">
                                     <p class="team_label">Team 3</p>
                                     <div class="input player">
                                         <input type="text" placeholder="Player Name" name="player[]" value="<?php e($prefillNames, "Esther") ?>" />
+                                        <input type="email" placeholder="Email (optional)" name="player_email[]" class="player-email" />
                                     </div>
                                     <div class="input player">
                                         <input type="text" placeholder="Player Name" name="player[]" value="<?php e($prefillNames, "Frank") ?>" />
+                                        <input type="email" placeholder="Email (optional)" name="player_email[]" class="player-email" />
                                     </div>
                                 </div>
                                 <div class="alliance_team team_d">
                                     <p class="team_label">Team 4</p>
                                     <div class="input player">
                                         <input type="text" placeholder="Player Name" name="player[]" />
+                                        <input type="email" placeholder="Email (optional)" name="player_email[]" class="player-email" />
                                     </div>
                                     <div class="input player">
                                         <input type="text" placeholder="Player Name" name="player[]" />
+                                        <input type="email" placeholder="Email (optional)" name="player_email[]" class="player-email" />
                                     </div>
                                 </div>
                             </div>

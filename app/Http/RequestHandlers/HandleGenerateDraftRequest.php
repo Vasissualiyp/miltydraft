@@ -35,9 +35,24 @@ class HandleGenerateDraftRequest extends RequestHandler
             return $this->error($e->getMessage(), 400);
         }
 
-        $draft = dispatch(new GenerateDraft($this->settingsFromRequest()));
+        $draft = dispatch(new GenerateDraft($this->settings));
 
         app()->repository->save($draft);
+
+        if (app()->mailer !== null && $draft->currentPlayerId !== null) {
+            $firstPlayer = $draft->playerById($draft->currentPlayerId);
+            if ($firstPlayer->email !== null) {
+                try {
+                    app()->mailer->sendTurnNotification(
+                        $firstPlayer->email,
+                        $firstPlayer->name,
+                        url('d/' . $draft->id),
+                        (string) $draft->settings->name,
+                    );
+                } catch (\Exception) {
+                }
+            }
+        }
 
         return $this->json([
             'id' => $draft->id,
@@ -50,6 +65,16 @@ class HandleGenerateDraftRequest extends RequestHandler
         $playerNames = [];
         for ($i = 0; $i < $this->request->get('num_players'); $i++) {
             $playerNames[] = trim($this->request->get('player')[$i] ?? '');
+        }
+
+        $playerEmails = [];
+        $rawEmails = $this->request->get('player_email') ?? [];
+        for ($i = 0; $i < $this->request->get('num_players'); $i++) {
+            $name = trim($this->request->get('player')[$i] ?? '');
+            $email = trim($rawEmails[$i] ?? '');
+            if ($name !== '' && $email !== '') {
+                $playerEmails[$name] = $email;
+            }
         }
 
         $allianceMode = (bool) $this->request->get('alliance_on', false);
@@ -91,6 +116,7 @@ class HandleGenerateDraftRequest extends RequestHandler
             $allianceMode ? AllianceTeamMode::from($this->request->get('alliance_teams')) : null,
             $allianceMode ? AllianceTeamPosition::from($this->request->get('alliance_teams_position')) : null,
             $allianceMode ? $this->request->get('force_double_picks') == 'on' : null,
+            $playerEmails,
         );
     }
 

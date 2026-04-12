@@ -13,6 +13,7 @@ use App\Http\HttpResponse;
 use App\Http\RequestHandler;
 use App\Http\Route;
 use App\Http\RouteMatch;
+use App\Mail\Mailer;
 use App\Shared\Command;
 use App\Testing\DispatcherSpy;
 
@@ -22,6 +23,7 @@ use App\Testing\DispatcherSpy;
 class Application
 {
     public readonly DraftRepository $repository;
+    public readonly ?Mailer $mailer;
     private static self $instance;
 
     public bool $spyOnDispatcher = false;
@@ -33,6 +35,20 @@ class Application
             $this->repository = new S3DraftRepository();
         } else {
             $this->repository = new LocalDraftRepository();
+        }
+
+        if (env('MAIL_HOST')) {
+            $this->mailer = new Mailer(
+                env('MAIL_HOST'),
+                (int) env('MAIL_PORT', 587),
+                env('MAIL_USERNAME', ''),
+                env('MAIL_PASSWORD', ''),
+                env('MAIL_FROM_ADDRESS', ''),
+                env('MAIL_FROM_NAME', 'MiltyDraft'),
+                env('MAIL_ENCRYPTION', 'tls'),
+            );
+        } else {
+            $this->mailer = null;
         }
     }
 

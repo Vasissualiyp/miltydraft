@@ -78,6 +78,7 @@ class PlayerTest extends TestCase
             'faction' => 'Mahact',
             'slice' => '3',
             'team' => 'A',
+            'email' => null,
         ], $player1->toArray());
         $this->assertSame([
             'id' => '2',
@@ -87,6 +88,7 @@ class PlayerTest extends TestCase
             'faction' => null,
             'slice' => null,
             'team' => null,
+            'email' => null,
         ], $player2->toArray());
     }
 

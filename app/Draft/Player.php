@@ -18,6 +18,7 @@ class Player
         public readonly ?string $pickedFaction = null,
         public readonly ?string $pickedSlice = null,
         public readonly ?string $team = null,
+        public readonly ?string $email = null,
     ) {
     }
 
@@ -31,10 +32,11 @@ class Player
             $playerData['faction'],
             $playerData['slice'],
             $playerData['team'] ?? null,
+            $playerData['email'] ?? null,
         );
     }
 
-    public static function create(string $name)
+    public static function create(string $name, ?string $email = null): self
     {
         return new self(
             PlayerId::generate(),
@@ -43,6 +45,8 @@ class Player
             null,
             null,
             null,
+            null,
+            $email,
         );
     }
 
@@ -56,6 +60,7 @@ class Player
             $this->pickedFaction,
             $this->pickedSlice,
             $team,
+            $this->email,
         );
     }
 
@@ -73,6 +78,7 @@ class Player
             $this->pickedFaction,
             $this->pickedSlice,
             $this->team,
+            $this->email,
         );
     }
 
@@ -90,6 +96,7 @@ class Player
             $this->pickedFaction,
             $this->pickedSlice,
             $this->team,
+            $this->email,
         );
     }
 
@@ -103,6 +110,7 @@ class Player
             'faction' => $this->pickedFaction,
             'slice' => $this->pickedSlice,
             'team' => $this->team,
+            'email' => $this->email,
         ];
     }
 
@@ -153,6 +161,7 @@ class Player
             $pick->category == PickCategory::FACTION ? $pick->pickedOption : $this->pickedFaction,
             $pick->category == PickCategory::SLICE ? $pick->pickedOption : $this->pickedSlice,
             $this->team,
+            $this->email,
         );
     }
 
@@ -170,6 +179,7 @@ class Player
             $category == PickCategory::FACTION ? null : $this->pickedFaction,
             $category == PickCategory::SLICE ? null : $this->pickedSlice,
             $this->team,
+            $this->email,
         );
     }
 }

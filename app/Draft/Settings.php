@@ -49,6 +49,10 @@ class Settings
         public ?AllianceTeamMode $allianceTeamMode = null,
         public ?AllianceTeamPosition $allianceTeamPosition = null,
         public ?bool $allianceForceDoublePicks = null,
+        /**
+         * @var array<string, string> $playerEmails name => email
+         */
+        public array $playerEmails = [],
     ) {
     }
 
@@ -68,6 +72,7 @@ class Settings
          */
         return [
             'players' => $this->playerNames,
+            'player_emails' => $this->playerEmails,
             'preset_draft_order' => $this->presetDraftOrder,
             'name' => (string) $this->name,
             'num_slices' => $this->numberOfSlices,
@@ -238,6 +243,7 @@ class Settings
             $allianceMode ? AllianceTeamMode::from($data['alliance']['alliance_teams']) : null,
             $allianceMode ? AllianceTeamPosition::from($data['alliance']['alliance_teams_position']) : null,
             $allianceMode ? (bool) $data['alliance']['force_double_picks'] : null,
+            $data['player_emails'] ?? [],
         );
     }
 
@@ -326,7 +332,7 @@ class Settings
             $this->allianceTeamMode,
             $this->allianceTeamPosition,
             $this->allianceForceDoublePicks,
+            $this->playerEmails,
         );
-
     }
 }

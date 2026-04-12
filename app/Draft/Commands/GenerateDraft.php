@@ -70,7 +70,9 @@ class GenerateDraft implements Command
         }
 
         foreach ($playerNames as $name) {
-            $p = Player::create($name);
+            $email = $this->settings->playerEmails[$name] ?? null;
+            $email = ($email !== '' && $email !== null) ? $email : null;
+            $p = Player::create($name, $email);
             $players[$p->id->value] = $p;
         }
 

@@ -30,17 +30,27 @@
 
           shellHook = ''
             mkdir -p tmp/test-drafts data/drafts
-            echo "MiltyDraft dev environment"
-            echo "PHP: $(php --version | head -1)"
-            echo "Composer: $(composer --version)"
-            echo ""
+
             if [ ! -f .env ]; then
               cp .env.example .env
-              echo "Created .env from .env.example"
+              echo "Created .env from .env.example — edit it before running the server."
             fi
             if [ ! -d vendor ]; then
-              echo "Run 'composer install' to install dependencies."
+              echo "Run 'composer install' to install dependencies, then 'serve' to start."
             fi
+
+            # Helper: start the PHP built-in dev server
+            serve() {
+              local env_port
+              env_port=$(grep -m1 '^DEV_PORT=' .env 2>/dev/null | cut -d= -f2 | tr -d '"')
+              local port=''${1:-''${env_port:-8080}}
+              echo "Starting dev server on http://0.0.0.0:$port"
+              echo "Set URL=\"http://localhost:$port/\" in .env (or your Tailscale address)."
+              php -S 0.0.0.0:"$port" index.php
+            }
+            export -f serve
+
+            echo "MiltyDraft dev environment  |  PHP $(php -r 'echo PHP_VERSION;')  |  run 'serve [port]' to start"
           '';
         };
       }

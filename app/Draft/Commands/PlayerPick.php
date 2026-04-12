@@ -38,6 +38,21 @@ class PlayerPick implements Command
 
         app()->repository->save($this->draft);
 
+        if (app()->mailer !== null && ! $this->draft->isDone && $this->draft->currentPlayerId !== null) {
+            $nextPlayer = $this->draft->playerById($this->draft->currentPlayerId);
+            if ($nextPlayer->email !== null) {
+                try {
+                    app()->mailer->sendTurnNotification(
+                        $nextPlayer->email,
+                        $nextPlayer->name,
+                        url('d/' . $this->draft->id),
+                        (string) $this->draft->settings->name,
+                    );
+                } catch (\Exception) {
+                }
+            }
+        }
+
         return $this->draft;
     }
 }
