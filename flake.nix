@@ -46,7 +46,7 @@
               local port=''${1:-''${env_port:-8080}}
               echo "Starting dev server on http://0.0.0.0:$port"
               echo "Set URL=\"http://localhost:$port/\" in .env (or your Tailscale address)."
-              php -S 0.0.0.0:"$port" index.php
+              php -S 0.0.0.0:"$port" router.php
             }
             export -f serve
 

@@ -94,7 +94,7 @@ if (! function_exists('url')) {
 if (! function_exists('asset_url')) {
     function asset_url($uri): string
     {
-        return url($uri . '?v=' . (env('DEBUG', false) ? (string) time() : env('VERSION')));
+        return '/' . $uri . '?v=' . (env('DEBUG', false) ? (string) time() : env('VERSION'));
     }
 }
 
