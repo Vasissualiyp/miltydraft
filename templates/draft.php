@@ -432,13 +432,13 @@
 
     <script>
         window.routes = {
-            "claim": "<?= url('api/claim') ?>",
-            "pick": "<?= url('api/pick') ?>",
-            "regenerate": "<?= url('api/regenerate') ?>",
-            "tile_images": "<?= url('img/tiles') ?>",
-            "data": "<?= url('api/draft/' . $draft->id) ?>",
-            "undo": "<?= url('api/undo') ?>",
-            "restore": "<?= url('api/restore') ?>"
+            "claim": "/api/claim",
+            "pick": "/api/pick",
+            "regenerate": "/api/regenerate",
+            "tile_images": "/img/tiles",
+            "data": "/api/draft/<?= $draft->id ?>",
+            "undo": "/api/undo",
+            "restore": "/api/restore"
         }
     </script>
     <script src="<?= asset_url('js/vendor.js') ?>"></script>

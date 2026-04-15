@@ -1,34 +1,35 @@
 {
-  description = "MiltyDraft — Twilight Imperium draft tool";
+    description = "MiltyDraft — Twilight Imperium draft tool";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-  };
+    inputs = {
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+        flake-utils.url = "github:numtide/flake-utils";
+    };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
+    outputs = { self, nixpkgs, flake-utils }:
+        flake-utils.lib.eachDefaultSystem (system:
+            let
+                pkgs = nixpkgs.legacyPackages.${system};
 
-        php = pkgs.php82.buildEnv {
-          extensions = ({ enabled, all }: enabled);
-          extraConfig = ''
+                php = pkgs.php82.buildEnv {
+                    extensions = ({ enabled, all }: enabled);
+                    extraConfig = ''
             memory_limit = 2G
-          '';
-        };
+                    '';
+                };
 
-        composer = php.packages.composer;
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          buildInputs = [
-            php
-            composer
-            pkgs.curl
-          ];
+                composer = php.packages.composer;
+            in
+                {
+                devShells.default = pkgs.mkShell {
+                    buildInputs = [
+                        php
+                        composer
+                        pkgs.mailpit
+                        pkgs.curl
+                    ];
 
-          shellHook = ''
+                    shellHook = ''
             mkdir -p tmp/test-drafts data/drafts
 
             if [ ! -f .env ]; then
@@ -51,8 +52,8 @@
             export -f serve
 
             echo "MiltyDraft dev environment  |  PHP $(php -r 'echo PHP_VERSION;')  |  run 'serve [port]' to start"
-          '';
-        };
-      }
-    );
+                    '';
+                };
+            }
+        );
 }

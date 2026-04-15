@@ -27,6 +27,7 @@ class Mailer
     ): void {
         $m = new PHPMailer(true);
         $m->isSMTP();
+        $m->Timeout = 5;
         $m->Host = $this->host;
         $m->Port = $this->port;
         $m->SMTPAuth = true;

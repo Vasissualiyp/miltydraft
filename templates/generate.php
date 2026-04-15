@@ -397,7 +397,7 @@
                                 <span class="help">
                                         You can skip the slice-generation stuff by inputting your own slices. You can do this by listing the tiles in each slice, one per line, seperated by commas.<br />
                                         Note: The order within each line matters! Slices are laid out like this:<br /><br />
-                                        <img class="slice-help" src="<?= url('img/slice-layout.png') ?>" /><br /> so the first slice listed will be to positioned top left of the home system, the second one top, third top right,...
+                                        <img class="slice-help" src="/img/slice-layout.png" /><br /> so the first slice listed will be to positioned top left of the home system, the second one top, third top right,...
                                     </span>
                             </div>
 
@@ -471,7 +471,7 @@
 
 <script>
     window.routes = {
-        "generate": "<?= url('api/generate') ?>"
+        "generate": "/api/generate"
     }
 </script>
 
