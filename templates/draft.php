@@ -87,7 +87,7 @@
                             <?php foreach ($draft->factionPool as $faction) : ?>
                                 <div class="faction option" data-homesystem="<?= $faction->homesystem() ?>" data-faction="<?= $faction->name ?>">
                                     <div>
-                                        <img src="<?= url('img/factions/ti_' . $faction->id . '.png') ?>" /><br />
+                                        <img src="<?= '/img/factions/ti_' . $faction->id . '.png' ?>" /><br />
 
                                         <span><?= $faction->name ?></span><br />
                                         <a href="#" data-id="<?= $faction->id ?>" class="open-reference">[reference]</a>
@@ -108,10 +108,10 @@
                                     <div class="slice-graph">
                                         <div class="wrap">
                                             <?php foreach ($slice->tiles as $i => $tile) : ?>
-                                                <img class="tile-<?= $i ?>" src="<?= url('img/tiles/ST_' . $tile->id . '.png') ?>" />
-                                                <img class="zoom tile-<?= $i ?>" src="<?= url('img/tiles/ST_' . $tile->id . '.png') ?>" />
+                                                <img class="tile-<?= $i ?>" src="<?= '/img/tiles/ST_' . $tile->id . '.png' ?>" />
+                                                <img class="zoom tile-<?= $i ?>" src="<?= '/img/tiles/ST_' . $tile->id . '.png' ?>" />
                                             <?php endforeach; ?>
-                                            <img class="tile-h" src="<?= url('img/tiles/ST_0.png') ?>" />
+                                            <img class="tile-h" src="<?= '/img/tiles/ST_0.png' ?>" />
                                         </div>
                                     </div>
 
@@ -120,12 +120,12 @@
 
                                         <div class="info">
                                             <?php foreach ($slice->specialties as $s) : ?>
-                                                <img class="tech-specialty" title="<?= $s->value ?>" src="<?= url('img/tech/' . $s->value . '.webp') ?>" alt="<?= $s->value ?>" />
+                                                <img class="tech-specialty" title="<?= $s->value ?>" src="<?= '/img/tech/' . $s->value . '.webp' ?>" alt="<?= $s->value ?>" />
                                             <?php endforeach; ?>
 
 
                                             <?php foreach ($slice->legendaryPlanets as $l) : ?>
-                                                <abbr class="legendary" title="<?= $l ?>"><img src="<?= url('img/legendary.webp') ?>"></abbr>
+                                                <abbr class="legendary" title="<?= $l ?>"><img src="<?= '/img/legendary.webp' ?>"></abbr>
                                             <?php endforeach; ?>
 
                                             <?php foreach ($slice->wormholes as $w) : ?>
@@ -390,7 +390,7 @@
 
     <div class="popup" id="reference-popup">
         <a class="btn close-reference invert">&times;</a>
-        <img data-base="<?= url('img/reference/r_') ?>" src="" />
+        <img data-base="<?= '/img/reference/r_' ?>" src="" />
     </div>
 
     <div class="popup" id="error-popup">
